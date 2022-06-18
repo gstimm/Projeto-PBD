@@ -10,11 +10,112 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Todo {
+model Competicao {
   id Int @id @default(autoincrement())
+  ano Int @unique
+  campeao Equipes @relation(fields: [campeaoId], references: [id])
+  campeaoId Int
+  partidas Partidas[]
+  paisSede String
+  numeroDeEquipes Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
-  title String
-  description String?
-  completed Boolean @default(false)
+}
+
+model Equipes {
+  id Int @id @default(autoincrement())
+  competicoesGanhas Competicao[]
+  comissaoDaEquipe ComissaoTecnica[]
+  jogadoresLinhaDaEquipe JogadorLinha[]
+  goleirosDaEquipe Goleiro[]
+  pais String 
+  ano Int
+  golsPro Int
+  golsContra Int
+  saldoDeGols Int
+  numeroDeVitorias Int
+  numeroDeEmpates Int
+  numeroDeDerrotas Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Estadios {
+  id Int @id @default(autoincrement())
+  partidasSediadas Partidas[]
+  nome String
+  capacidade Int
+  cidade String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Partidas {
+  id Int @id @default(autoincrement())
+  estadio Estadios @relation(fields: [estadioId], references: [id])
+  estadioId Int
+  competicao Competicao @relation(fields: [competicaoId], references: [id])
+  competicaoId Int
+  ano Int
+  dataJogo DateTime
+  fase String
+  nomeEstadio String
+  horaInicial DateTime
+  vencedor String
+  equipe1 String
+  equipe2 String
+  golsEquipe1 Int
+  golsEquipe2 Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model ComissaoTecnica {
+  id Int @id @default(autoincrement())
+  equipe Equipes @relation(fields: [equipeId], references: [id])
+  equipeId Int
+  passaporte String
+  nome String
+  idade Int
+  dataNascimento DateTime
+  funcao String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model JogadorLinha {
+  id Int @id @default(autoincrement())
+  equipe Equipes @relation(fields: [equipeId], references: [id])
+  equipeId Int
+  passaporte String
+  nome String
+  idade Int
+  dataNascimento DateTime
+  posicao String
+  gols Int
+  assistencias Int
+  cartoesAmarelos Int
+  cartoesVermelhos Int
+  pais String
+  ano Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model Goleiro {
+  id Int @id @default(autoincrement())
+  equipe Equipes @relation(fields: [equipeId], references: [id])
+  equipeId Int
+  passaporte String
+  nome String
+  idade Int
+  dataNascimento DateTime
+  defesas Int
+  golsSofridos Int
+  cartoesAmarelos Int
+  cartoesVermelhos Int
+  pais String
+  ano Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 }
