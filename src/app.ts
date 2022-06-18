@@ -1,9 +1,10 @@
 import express, { Request, Response } from "express";
-
+import { PrismaClient } from "@prisma/client";
 import { CompeticaoRoutes } from "./routes/index";
 
 class App {
   public app: express.Application;
+  public prisma = new PrismaClient();
 
   constructor() {
     this.app = express();
@@ -20,6 +21,21 @@ class App {
       res.send("Hello World!");
     });
     this.app.use("/competicao", CompeticaoRoutes);
+
+    this.app.get("/api/todos", async (req: Request, res: Response) => {
+      try {
+        const allUsers = await this.prisma.todo.findMany();
+        return res.json({
+          success: true,
+          data: allUsers,
+        });
+      } catch (error) {
+        return res.json({
+          success: false,
+          message: error,
+        });
+      }
+    });
   }
 }
 
