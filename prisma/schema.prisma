@@ -97,7 +97,6 @@ model JogadorLinha {
   assistencias Int @default(0)
   cartoesAmarelos Int @default(0)
   cartoesVermelhos Int @default(0)
-  pais String
   ano Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -115,7 +114,6 @@ model Goleiro {
   golsSofridos Int @default(0)
   cartoesAmarelos Int @default(0)
   cartoesVermelhos Int @default(0)
-  pais String
   ano Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
