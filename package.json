@@ -5,7 +5,7 @@
   "author": "Gabriel Timm, Henrique Garcia, Lucas Ferreira",
   "license": "MIT",
   "scripts": {
-    "build": "yarn tsc",
+    "build": "tsc",
     "start": "tsnd --respawn -r tsconfig-paths/register --exit-child --ignore-watch node_modules src/index.ts",
     "dev": "nodemon src/index.ts"
   },
