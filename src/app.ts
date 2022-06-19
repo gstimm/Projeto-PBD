@@ -1,6 +1,15 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import { PrismaClient } from "@prisma/client";
-import { CompeticaoRoutes } from "./routes/index";
+
+import {
+  CompeticaoRoutes,
+  ComissaoTecnicaRoutes,
+  EquipesRoutes,
+  GoleirosRoutes,
+  EstadiosRoutes,
+  JogadoresLinhaRoutes,
+  PartidasRoutes,
+} from "./routes/index";
 
 class App {
   public app: express.Application;
@@ -17,10 +26,13 @@ class App {
   }
 
   routes() {
-    this.app.get("/", (req: Request, res: Response) => {
-      res.send("Hello World!");
-    });
     this.app.use("/competicao", CompeticaoRoutes);
+    this.app.use("/partidas", PartidasRoutes);
+    this.app.use("/equipes", EquipesRoutes);
+    this.app.use("/estadios", EstadiosRoutes);
+    this.app.use("/jogadores-linha", JogadoresLinhaRoutes);
+    this.app.use("/goleiros", GoleirosRoutes);
+    this.app.use("/comissao-tecnica", ComissaoTecnicaRoutes);
   }
 }
 

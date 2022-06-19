@@ -17,7 +17,7 @@ model Competicao {
   campeaoId Int
   partidas Partidas[]
   paisSede String
-  numeroDeEquipes Int
+  numeroDeEquipes Int @default(32)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
@@ -30,12 +30,12 @@ model Equipes {
   goleirosDaEquipe Goleiro[]
   pais String 
   ano Int
-  golsPro Int
-  golsContra Int
-  saldoDeGols Int
-  numeroDeVitorias Int
-  numeroDeEmpates Int
-  numeroDeDerrotas Int
+  golsPro Int @default(0)
+  golsContra Int @default(0)
+  saldoDeGols Int @default(0)
+  numeroDeVitorias Int @default(0)
+  numeroDeEmpates Int @default(0)
+  numeroDeDerrotas Int @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
@@ -44,7 +44,7 @@ model Estadios {
   id Int @id @default(autoincrement())
   partidasSediadas Partidas[]
   nome String
-  capacidade Int
+  capacidade Int @default(0)
   cidade String
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
@@ -60,12 +60,11 @@ model Partidas {
   dataJogo DateTime
   fase String
   nomeEstadio String
-  horaInicial DateTime
-  vencedor String
+  vencedor String @default("")
   equipe1 String
   equipe2 String
-  golsEquipe1 Int
-  golsEquipe2 Int
+  golsEquipe1 Int @default(0)
+  golsEquipe2 Int @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
@@ -79,6 +78,7 @@ model ComissaoTecnica {
   idade Int
   dataNascimento DateTime
   funcao String
+  ano Int
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 }
@@ -92,10 +92,10 @@ model JogadorLinha {
   idade Int
   dataNascimento DateTime
   posicao String
-  gols Int
-  assistencias Int
-  cartoesAmarelos Int
-  cartoesVermelhos Int
+  gols Int @default(0)
+  assistencias Int @default(0)
+  cartoesAmarelos Int @default(0)
+  cartoesVermelhos Int @default(0)
   pais String
   ano Int
   createdAt DateTime @default(now())
@@ -110,10 +110,10 @@ model Goleiro {
   nome String
   idade Int
   dataNascimento DateTime
-  defesas Int
-  golsSofridos Int
-  cartoesAmarelos Int
-  cartoesVermelhos Int
+  defesas Int @default(0)
+  golsSofridos Int @default(0)
+  cartoesAmarelos Int @default(0)
+  cartoesVermelhos Int @default(0)
   pais String
   ano Int
   createdAt DateTime @default(now())
