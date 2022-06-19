@@ -30,4 +30,4 @@ RUN yarn prisma generate
 EXPOSE 3333
 
 # A command to start the server
-CMD yarn start
+CMD ["yarn", "start"]

@@ -16,6 +16,7 @@ CREATE TABLE "Equipes" (
     "id" SERIAL NOT NULL,
     "pais" TEXT NOT NULL,
     "ano" INTEGER NOT NULL,
+    "grupo" TEXT NOT NULL,
     "golsPro" INTEGER NOT NULL DEFAULT 0,
     "golsContra" INTEGER NOT NULL DEFAULT 0,
     "saldoDeGols" INTEGER NOT NULL DEFAULT 0,

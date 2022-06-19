@@ -39,6 +39,10 @@ services:
     ports:
       - "3333:3333"
     restart: always
+    command: ["yarn", "start"]
+    env_file: .env
+    volumes:
+      - .:/app
 
 volumes:
   postgres-data:
