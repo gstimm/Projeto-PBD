@@ -5,6 +5,17 @@ const prisma = new PrismaClient();
 
 class GoleirosController {
   async index(req: Request, res: Response) {
+    const { equipeID, ano } = req.query;
+
+    if (equipeID && ano) {
+      const goleiros = await prisma.goleiro.findMany({
+        where: {
+          equipeId: Number(equipeID),
+          ano: Number(ano),
+        },
+      });
+      return res.json(goleiros);
+    }
     const goleiro = await prisma.goleiro.findMany();
     return res.json(goleiro);
   }
@@ -26,7 +37,6 @@ class GoleirosController {
         passaporte: req.body.passaporte,
         ano: req.body.ano,
         idade: req.body.idade,
-        pais: req.body.pais,
         equipe: req.body.equipe,
       },
     });
@@ -46,7 +56,6 @@ class GoleirosController {
       data: {
         ano: req.body.ano,
         idade: req.body.idade,
-        pais: req.body.pais,
         equipe: req.body.equipe,
         defesas: req.body.defesas,
         golsSofridos: req.body.golsSofridos,

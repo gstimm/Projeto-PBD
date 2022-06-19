@@ -5,6 +5,17 @@ const prisma = new PrismaClient();
 
 class JogadoresLinhaController {
   async index(req: Request, res: Response) {
+    const { equipeID, ano } = req.query;
+
+    if (equipeID && ano) {
+      const jogadoresLinha = await prisma.jogadorLinha.findMany({
+        where: {
+          equipeId: Number(equipeID),
+          ano: Number(ano),
+        },
+      });
+      return res.json(jogadoresLinha);
+    }
     const jogadorLinha = await prisma.jogadorLinha.findMany();
     return res.json(jogadorLinha);
   }
@@ -28,7 +39,6 @@ class JogadoresLinhaController {
         posicao: req.body.posicao,
         equipe: req.body.equipe,
         idade: req.body.idade,
-        pais: req.body.pais,
       },
     });
 
@@ -45,7 +55,6 @@ class JogadoresLinhaController {
         posicao: req.body.posicao,
         equipe: req.body.equipe,
         idade: req.body.idade,
-        pais: req.body.pais,
         gols: req.body.gols,
         assistencias: req.body.assistencias,
         cartoesAmarelos: req.body.cartoesAmarelos,
