@@ -42,7 +42,7 @@ services:
     command: ["yarn", "start"]
     env_file: .env
     volumes:
-      - .:/app
+      - .:/
 
 volumes:
   postgres-data:
