@@ -35,10 +35,14 @@ class JogadoresLinhaController {
         nome: req.body.nome,
         dataNascimento: req.body.dataNascimento,
         passaporte: req.body.passaporte,
-        ano: req.body.ano,
+        ano: Number(req.body.ano),
         posicao: req.body.posicao,
-        equipe: req.body.equipe,
-        idade: req.body.idade,
+        idade: Number(req.body.idade),
+        equipe: {
+          connect: {
+            id: Number(req.body.equipe),
+          },
+        },
       },
     });
 

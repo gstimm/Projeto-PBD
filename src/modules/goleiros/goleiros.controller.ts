@@ -35,9 +35,13 @@ class GoleirosController {
         nome: req.body.nome,
         dataNascimento: req.body.dataNascimento,
         passaporte: req.body.passaporte,
-        ano: req.body.ano,
-        idade: req.body.idade,
-        equipe: req.body.equipe,
+        ano: Number(req.body.ano),
+        idade: Number(req.body.idade),
+        equipe: {
+          connect: {
+            id: Number(req.body.equipe),
+          },
+        },
       },
     });
 
