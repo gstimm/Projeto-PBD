@@ -13,8 +13,8 @@ datasource db {
 model Competicao {
   id Int @id @default(autoincrement())
   ano Int @unique
-  campeao Equipes @relation(fields: [campeaoId], references: [id])
-  campeaoId Int
+  campeao Equipes? @relation(fields: [campeaoId], references: [id])
+  campeaoId Int? 
   partidas Partidas[]
   paisSede String
   numeroDeEquipes Int @default(32)
@@ -30,6 +30,7 @@ model Equipes {
   goleirosDaEquipe Goleiro[]
   pais String 
   ano Int
+  grupo String
   golsPro Int @default(0)
   golsContra Int @default(0)
   saldoDeGols Int @default(0)

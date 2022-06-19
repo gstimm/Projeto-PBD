@@ -5,6 +5,16 @@ const prisma = new PrismaClient();
 
 class EquipesController {
   async index(req: Request, res: Response) {
+    const { ano } = req.query;
+
+    if (ano && !isNaN(Number(ano))) {
+      const equipes = await prisma.equipes.findMany({
+        where: { ano: Number(ano) },
+      });
+
+      return res.json(equipes);
+    }
+
     const equipes = await prisma.equipes.findMany();
     return res.json(equipes);
   }
@@ -22,12 +32,13 @@ class EquipesController {
     const equipe = await prisma.equipes.create({
       data: {
         pais: req.body.pais,
-        ano: req.body.ano,
+        ano: Number(req.body.ano),
+        grupo: req.body.grupo,
       },
     });
 
     const equipesDaEdicao = await prisma.equipes.findMany({
-      where: { ano: req.body.ano },
+      where: { ano: Number(req.body.ano) },
     });
 
     return res.json({ equipe, equipesDaEdicao });

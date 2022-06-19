@@ -2,7 +2,7 @@
 CREATE TABLE "Competicao" (
     "id" SERIAL NOT NULL,
     "ano" INTEGER NOT NULL,
-    "campeaoId" INTEGER NOT NULL,
+    "campeaoId" INTEGER,
     "paisSede" TEXT NOT NULL,
     "numeroDeEquipes" INTEGER NOT NULL DEFAULT 32,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -121,7 +121,7 @@ CREATE TABLE "Goleiro" (
 CREATE UNIQUE INDEX "Competicao_ano_key" ON "Competicao"("ano");
 
 -- AddForeignKey
-ALTER TABLE "Competicao" ADD CONSTRAINT "Competicao_campeaoId_fkey" FOREIGN KEY ("campeaoId") REFERENCES "Equipes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Competicao" ADD CONSTRAINT "Competicao_campeaoId_fkey" FOREIGN KEY ("campeaoId") REFERENCES "Equipes"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Partidas" ADD CONSTRAINT "Partidas_competicaoId_fkey" FOREIGN KEY ("competicaoId") REFERENCES "Competicao"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

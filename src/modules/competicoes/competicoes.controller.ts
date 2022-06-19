@@ -23,7 +23,6 @@ class CompeticoesController {
       data: {
         ano: req.body.ano,
         paisSede: req.body.paisSede,
-        campeao: req.body.campeao,
       },
     });
 
