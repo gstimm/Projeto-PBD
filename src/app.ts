@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from "cors";
 import { PrismaClient } from "@prisma/client";
 
@@ -39,7 +39,7 @@ class App {
     this.app.use("/jogadores-linha", JogadoresLinhaRoutes);
     this.app.use("/goleiros", GoleirosRoutes);
     this.app.use("/comissao-tecnica", ComissaoTecnicaRoutes);
-    this.app.get("/", (req, res) => {
+    this.app.get("/", (req: Request, res: Response) => {
       res.send("Hello World!");
     });
   }
