@@ -5,6 +5,18 @@ const prisma = new PrismaClient();
 
 class ComissaoTecnicaController {
   async index(req: Request, res: Response) {
+    const { equipeID, ano } = req.query;
+
+    if (equipeID && ano) {
+      const comissaoTecnica = await prisma.comissaoTecnica.findMany({
+        where: {
+          equipeId: Number(equipeID),
+          ano: Number(ano),
+        },
+      });
+      return res.json(comissaoTecnica);
+    }
+
     const comissaoTecnica = await prisma.comissaoTecnica.findMany();
     return res.json(comissaoTecnica);
   }
@@ -25,9 +37,13 @@ class ComissaoTecnicaController {
         dataNascimento: req.body.dataNascimento,
         passaporte: req.body.passaporte,
         funcao: req.body.funcao,
-        idade: req.body.idade,
-        equipe: req.body.equipe,
-        ano: req.body.ano,
+        idade: Number(req.body.idade),
+        ano: Number(req.body.ano),
+        equipe: {
+          connect: {
+            id: Number(req.body.equipe),
+          },
+        },
       },
     });
 
