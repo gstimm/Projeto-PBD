@@ -5,6 +5,16 @@ const prisma = new PrismaClient();
 
 class PartidasController {
   async index(req: Request, res: Response) {
+    const { ano } = req.query;
+
+    if (ano) {
+      const partidas = await prisma.partidas.findMany({
+        where: {
+          ano: Number(ano),
+        },
+      });
+      return res.json(partidas);
+    }
     const partidas = await prisma.partidas.findMany();
     return res.json(partidas);
   }
