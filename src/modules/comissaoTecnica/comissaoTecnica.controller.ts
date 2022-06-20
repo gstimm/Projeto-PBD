@@ -48,7 +48,10 @@ class ComissaoTecnicaController {
     });
 
     const comissaoTecnicaDaEdicao = await prisma.comissaoTecnica.findMany({
-      where: { ano: req.body.ano },
+      where: {
+        ano: Number(req.body.ano),
+        equipeId: Number(req.body.equipe),
+      },
     });
 
     return res.json({ comissaoTecnica, comissaoTecnicaDaEdicao });
