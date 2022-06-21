@@ -31,10 +31,18 @@ class PartidasController {
   async store(req: Request, res: Response) {
     const partida = await prisma.partidas.create({
       data: {
-        competicao: req.body.competicao,
+        competicao: {
+          connect: {
+            id: req.body.competicao,
+          },
+        },
         ano: req.body.ano,
         dataJogo: req.body.dataJogo,
-        estadio: req.body.estadio,
+        estadio: {
+          connect: {
+            id: req.body.estadio,
+          },
+        },
         nomeEstadio: req.body.nomeEstadio,
         equipe1: req.body.equipe1,
         equipe2: req.body.equipe2,
@@ -81,3 +89,4 @@ class PartidasController {
   }
 }
 export default new PartidasController();
+
